@@ -9,6 +9,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  *
@@ -23,7 +24,7 @@ public class ArduinoController {
     @RequestMapping(method = RequestMethod.GET)
     public String printWelcome(ModelMap model) {
 
-        model.addAttribute("message", "Spring 3 MVC Hello World");
+        model.put("msg", sum);
         return "arduino";
 
     }
@@ -35,5 +36,11 @@ public class ArduinoController {
         sum+=Integer.parseInt(input);
         model.put("msg", sum);
         return "arduino";
+    }
+    
+    @RequestMapping(value = "/arduino/user/{size}", method = RequestMethod.GET, params = "size")
+    public @ResponseBody String user(@RequestParam String size) {
+        sum+=Integer.parseInt(size);
+        return sum+"";
     }
 }

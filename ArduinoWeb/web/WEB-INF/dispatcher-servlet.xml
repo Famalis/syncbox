@@ -23,6 +23,7 @@
             <props>
                 <prop key="index.htm">indexController</prop>
                 <prop key="arduino.htm">arduinoController</prop>
+                <prop key="arduino/user/{size}.htm">arduinoController</prop>
             </props>
         </property>
     </bean>
