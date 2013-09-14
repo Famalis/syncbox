@@ -21,9 +21,16 @@
     <bean id="urlMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
         <property name="mappings">
             <props>
-                <prop key="index.htm">indexController</prop>
                 <prop key="arduino.htm">arduinoController</prop>
-                <prop key="arduino/user/{size}.htm">arduinoController</prop>
+                <prop key="arduino/changeSize/{size}.htm">arduinoController</prop>
+                <prop key="arduino/changeSize2/{size}.htm">arduinoController</prop>
+                <prop key="arduino/changeDelay/{delay}.htm">arduinoController</prop>                
+                <prop key="arduino/singleDrop.htm">arduinoController</prop>
+                <prop key="arduino/loopSingleDrop.htm">arduinoController</prop>
+                <prop key="arduino/loopTwoDrops.htm">arduinoController</prop>
+                <prop key="arduino/stopLoop.htm">arduinoController</prop>
+                <prop key="arduino/twoDrops.htm">arduinoController</prop>
+                <prop key="port.htm">portController</prop>
             </props>
         </property>
     </bean>
@@ -36,11 +43,10 @@
     <!--
     The index controller.
     -->
-    <bean name="indexController"
-          class="org.springframework.web.servlet.mvc.ParameterizableViewController"
-          p:viewName="index" />
     
     <bean id="arduinoController" 
 		class="controllers.ArduinoController" />
+    <bean id="portController" 
+		class="controllers.PortController" />
 
 </beans>
