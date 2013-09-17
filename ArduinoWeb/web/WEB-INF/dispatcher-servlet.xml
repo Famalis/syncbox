@@ -30,6 +30,7 @@
                 <prop key="arduino/loopTwoDrops.htm">arduinoController</prop>
                 <prop key="arduino/stopLoop.htm">arduinoController</prop>
                 <prop key="arduino/twoDrops.htm">arduinoController</prop>
+                <prop key="arduino/loadPreset/{id}.htm">arduinoController</prop>
                 <prop key="port.htm">portController</prop>
             </props>
         </property>

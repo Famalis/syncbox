@@ -23,6 +23,7 @@ public class Serial implements SerialPortEventListener {
     private static final int TIME_OUT = 2000;
     private static final int DATA_RATE = 9600;
     private ArduinoController arduinoController;
+    public String consoleBuffer = "";
 
     public ArduinoController getArduinoController() {
         return arduinoController;
@@ -108,8 +109,11 @@ public class Serial implements SerialPortEventListener {
                 byte chunk[] = new byte[available];
                 input.read(chunk, 0, available);
                 String sChunk = new String(chunk);
-                arduinoController.console+= sChunk;
-                System.out.println(new String(chunk));
+                //ArduinoController.console+= sChunk;
+                consoleBuffer += new String(chunk);
+                //System.out.println(new String(chunk));
+                //System.out.println("Console buffer " +consoleBuffer);
+                //ArduinoController.console = consoleBuffer;
             } catch (Exception e) {
                 e.printStackTrace();
             }

@@ -4,6 +4,7 @@
  */
 package controllers;
 
+import models.Preset;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,10 +30,15 @@ public class ArduinoController {
 
     @RequestMapping(method = RequestMethod.GET)
     public String home(ModelMap model) {
-
-        updateConsole(model);
+        
         return "arduino";
 
+    }
+    
+    private void constatData(ModelMap model) {        
+        getComController(model).loadPresets();
+        model.put("presets", ComController.presets);
+        model.put(initMsg, model);
     }
 
     private void setUserPort(String port) {
@@ -71,48 +77,73 @@ public class ArduinoController {
         System.out.println(userPort);
         model.put("port", userPort);
         getComController(model);
-        updateConsole(model);
+        constatData(model);
+        model.put("size1", "5");
+        model.put("size2", "5");
+        model.put("delay", "5");
         return "arduino";
     }
 
     @RequestMapping(value = "/arduino/changeSize/{size}", params = "size")
     public @ResponseBody
-    void changeDropSize(@RequestParam String size, ModelMap model) {
-        //console="";
+    String changeDropSize(@RequestParam String size, ModelMap model) {
+        console = "";
         System.out.println("Change size " + size);
-        getComController(model).changeDropSize(size);
+        getComController(model).changeDropSize(size);        
         updateConsole(model);
+        return console;
     }
 
     @RequestMapping(value = "/arduino/changeSize2/{size}", params = "size")
     public @ResponseBody
-    void changeSecondDropSize(@RequestParam String size, ModelMap model) {
-        //console="";
+    String changeSecondDropSize(@RequestParam String size, ModelMap model) {
+        console="";
         System.out.println("Change size 2 " + size);
         getComController(model).changeSecondDropSize(size);
         updateConsole(model);
+        return console;
+    }
+    
+    @RequestMapping(value = "/arduino/changeDelay/{delay}", params = "delay")
+    public @ResponseBody
+    String changePhotoDelay(@RequestParam String delay, ModelMap model) {
+        System.out.println("Change photo delay");
+        console="";
+        getComController(model).changePhotoDelay(delay);
+        updateConsole(model);
+        return console;
     }
 
     @RequestMapping(value = "/arduino/singleDrop")
     public @ResponseBody
-    void singleDrop(ModelMap model) {
+    String singleDrop(ModelMap model) {
         System.out.println("Single drop");
-        //console="";
+        console="";
         getComController(model).singleDrop();
         updateConsole(model);
+        return console;
+    }
+    
+    @RequestMapping(value = "/arduino/twoDrops")
+    public @ResponseBody
+    String twoDrops(ModelMap model) {
+        System.out.println("Two drop");
+        console="";
+        getComController(model).twoDrops();
+        updateConsole(model);
+        return console;
     }
 
     @RequestMapping(value = "/arduino/loopSingleDrop")
     public @ResponseBody
     void loopSingleDrop(ModelMap model) {
-        System.out.println("Loop Single drop");        
+        System.out.println("Loop Single drop");
         singleLoop = new DropLoop(this.getComController(model));
         singleLoop.single = true;
         Thread loop = new Thread(singleLoop);
         loop.start();
-        updateConsole(model);
     }
-    
+
     @RequestMapping(value = "/arduino/loopTwoDrops")
     public @ResponseBody
     void loopTwoDrops(ModelMap model) {
@@ -121,7 +152,6 @@ public class ArduinoController {
         singleLoop.single = false;
         Thread loop = new Thread(singleLoop);
         loop.start();
-        updateConsole(model);
     }
 
     @RequestMapping(value = "/arduino/stopLoop")
@@ -129,30 +159,37 @@ public class ArduinoController {
     void stopLoop(ModelMap model) {
         System.out.println("Stop loop");
         singleLoop.run = false;
-        updateConsole(model);
+    }
+    
+    @RequestMapping(method = RequestMethod.GET, params = "preset")
+    public String loadPreset(@RequestParam String preset, ModelMap model) {
+        System.out.println("Load preset");
+        Integer index = Integer.parseInt(preset);
+        Preset p = ComController.presets.get(index-1);
+        System.out.println(p.name);
+        model.put("size1", p.dropSize);
+        getComController(model).changeDropSize(p.dropSize+"");
+        model.put("size2", p.dropSize2);
+        getComController(model).changeSecondDropSize(p.dropSize2+"");
+        model.put("delay", p.dropDelay);
+        getComController(model).changePhotoDelay(p.dropDelay+"");
+        constatData(model);
+        return "arduino";
     }
 
-    @RequestMapping(value = "/arduino/changeDelay/{delay}", params = "delay")
-    public @ResponseBody
-    void changePhotoDelay(@RequestParam String delay, ModelMap model) {
-        System.out.println("Change photo delay");
-        //console="";
-        getComController(model).changePhotoDelay(delay);
-        updateConsole(model);
-    }
+    
 
-    @RequestMapping(value = "/arduino/twoDrops")
-    public @ResponseBody
-    void twoDrops(ModelMap model) {
-        System.out.println("Two drop");
-        //console="";
-        getComController(model).twoDrops();
-        updateConsole(model);
-    }
+    
 
-    private void updateConsole(ModelMap model) {
-        console += "\n---------------\n";
+    private void updateConsole(ModelMap model) {        
+        while (!console.contains("/end/")) {
+            console = getComController(model).getSerial().consoleBuffer;
+            //System.out.println("size = " + console.length() + " so still waiting");
+        }        
+        console = getComController(model).getSerial().consoleBuffer;        
+        System.out.println("\n"+getComController(model).getSerial().consoleBuffer);
         model.put("console", console);
-        //System.out.println(console);
+        //System.out.println("CONSOLE:\n" + console);
+        getComController(model).getSerial().consoleBuffer="";
     }
 }
