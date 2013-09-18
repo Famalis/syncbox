@@ -77,10 +77,18 @@
                 });
             });
             $(document).ready(function() {
-                $('#stopLoop').click(function(event) {
-                    var index = $('#preset').val();
-                    $.get('/ArduinoWeb/app/arduino/loadPreset/' + index + '.htm', {id: index}, function(responseText) {
-                        $('#console').text(responseText);
+                $('#savePreset').click(function(event) {
+                    var name  = $('#newPresetName').val();
+                    var size1 = $('#sizeSlide').val();
+                    var size2 = $('#sizeSlide2').val();
+                    var delay = $('#photoDelay').val();
+                    $.get('/ArduinoWeb/app/arduino/savePreset/' + name + "_" + size1 + "_" + size2 + "_" + delay + ".htm",
+                    {name: name},
+                            {size1: size1},
+                    {size2: size2},
+                    {delay: delay},
+                    function(responseText) {
+                        $('#console').text('/ArduinoWeb/app/arduino/savePreset/' + name + "_" + size1 + "_" + size2 + "_" + delay + ".htm");
                     });
                 });
             });
@@ -167,7 +175,9 @@
                         </ol>
 
                         <input type="submit" value="Wczytaj preset" id="loadPreset"/>
-                    </form
+                    </form>
+                    <input type="text" id="newPresetName" value="Nazwa"/>
+                    <input type="submit" value="Zapisz preset" id="savePreset"/>
                 </td>
             </tr>
         </table>

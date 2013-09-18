@@ -177,7 +177,20 @@ public class ArduinoController {
         return "arduino";
     }
 
-    
+    @RequestMapping(value = "/arduino/savePreset/{name}_{size1}_{size2}_{delay}", params = {"name", "size1", "size2" ,"delay"})
+    public @ResponseBody
+    String savePreset(@RequestParam String name, @RequestParam String size1, @RequestParam String size2, @RequestParam String delay, ModelMap model) {
+        System.out.println("Save preset");
+        console="";
+        Preset p = new Preset();
+        p.dropDelay = Integer.parseInt(delay);
+        p.dropSize  = Integer.parseInt(size1);
+        p.dropSize2 = Integer.parseInt(size2);
+        System.out.println("Adding preset "+p.name);
+        ComController.presets.add(p);
+        updateConsole(model);
+        return console;
+    }
 
     
 

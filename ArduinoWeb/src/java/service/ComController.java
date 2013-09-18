@@ -71,7 +71,7 @@ public class ComController {
         serial.sendCharacter('b');
     }
     
-    public void savePreset() {
+    public static void savePreset() {
         File file = null;
         FileOutputStream fos = null;
         ObjectOutputStream oos = null;
@@ -93,7 +93,7 @@ public class ComController {
         
     }
     
-    public void loadPresets()  {
+    public static void loadPresets()  {
         File file = null;
         FileInputStream fis = null;
         ObjectInputStream ois = null;
