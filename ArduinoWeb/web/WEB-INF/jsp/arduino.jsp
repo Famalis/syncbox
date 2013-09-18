@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-<html>
+<html ng-app>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <style type="text/css">
@@ -9,7 +9,11 @@
         </style>
         <script src="http://code.jquery.com/jquery-latest.js">
         </script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js">
+        </script>
+        <script src="/ArduinoWeb/resources/angularjs/ArduinoController.js"></script>
         <script>
+            var presetNames = new Array();
             $(document).ready(function() {
                 $('#sizeSubmit').click(function(event) {
                     var sliderSize = $('#sizeSlide').val();
@@ -78,20 +82,28 @@
             });
             $(document).ready(function() {
                 $('#savePreset').click(function(event) {
-                    var name  = $('#newPresetName').val();
-                    var size1 = $('#sizeSlide').val();
-                    var size2 = $('#sizeSlide2').val();
-                    var delay = $('#photoDelay').val();
-                    $.get('/ArduinoWeb/app/arduino/savePreset/' + name + "_" + size1 + "_" + size2 + "_" + delay + ".htm",
-                    {name: name},
-                            {size1: size1},
-                    {size2: size2},
-                    {delay: delay},
+                    var presetName = $('#newPresetName').val();
+                    var dropSize1 = $('#sizeSlide').val();
+                    var dropSize2 = $('#sizeSlide2').val();
+                    var photoDelay = $('#photoDelay').val();
+                    $.get('/ArduinoWeb/app/arduino/savePreset/' + presetName + "_" + dropSize1 + "_" + dropSize2 + "_" + photoDelay + ".htm", {name: presetName, size1: dropSize1, size2: dropSize2, delay: photoDelay},
                     function(responseText) {
-                        $('#console').text('/ArduinoWeb/app/arduino/savePreset/' + name + "_" + size1 + "_" + size2 + "_" + delay + ".htm");
+                        $('#console').text('/ArduinoWeb/app/arduino/savePreset/' + presetName + "_" + dropSize1 + "_" + dropSize2 + "_" + photoDelay + ".htm");
                     });
+                    $("#scores").load("index.php #scores");
                 });
             });
+            function reloadPage()
+              {
+                  location.reload()
+              }
+            function testF() {
+                var t1 = ${presets};
+                document.getElementById("kakaka").value = presetNames;
+            }
+            function setPreset(index, name) {
+                presetNames[index] = name;
+            }
         </script>
         <script type="text/javascript">
             function updateSlider(slideAmount, num) {
@@ -105,12 +117,10 @@
                 pic.style.width = slideAmount + "%";
                 pic.style.height = slideAmount + "%";
             }
-
-
         </script>
     </head>
-    <body>
-        <h4>${initMsg} ${port}</h4>        
+    <body ng-controller="ArduinoCtrl" ng-init="test = ${presets}">
+        <h4>${connectionMsg}${port}</h4>   
         <table border="1px">
             <tr>
                 <td>
@@ -166,24 +176,21 @@
             </tr>
             <tr>
                 <td>
-                    <form name="preset" action="arduino.htm" method="get">
+                    <form name="preset" action="arduino.htm" method="get">                        
                         Presets:
                         <ol>
                             <c:forEach var="preset" items="${presets}" varStatus="counter">
-                                <li>${preset.name} <input type="radio" name="preset" value="${counter.count}"</li>
+                                <li>${preset} <input type="radio" name="preset" value="${counter.count}"</li>
                                 </c:forEach>
                         </ol>
 
                         <input type="submit" value="Wczytaj preset" id="loadPreset"/>
                     </form>
                     <input type="text" id="newPresetName" value="Nazwa"/>
-                    <input type="submit" value="Zapisz preset" id="savePreset"/>
+                    <input type="submit" value="Zapisz preset" id="savePreset" onclick="reloadPage()"/>
                 </td>
             </tr>
         </table>
         <p id="console"></p>
-        <c:forEach var="ble" items="${bles}">
-            <h1>${ble}</h1>
-        </c:forEach>
     </body>
 </html>
