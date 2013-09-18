@@ -1,6 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
 <html ng-app>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -98,12 +97,14 @@
                   location.reload()
               }
             function testF() {
-                var t1 = ${presets};
-                document.getElementById("kakaka").value = presetNames;
+                $.get('/ArduinoWeb/app/arduino/stopLoop.htm', function(responseText) {
+                        $('#console').text(responseText);
+                    });
             }
             function setPreset(index, name) {
                 presetNames[index] = name;
             }
+                        
         </script>
         <script type="text/javascript">
             function updateSlider(slideAmount, num) {
