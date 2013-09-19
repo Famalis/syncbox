@@ -182,12 +182,15 @@ public class ArduinoController {
         Integer index = Integer.parseInt(preset);
         Preset p = ComController.presets.get(index-1);
         System.out.println(p.name);
-        model.put("size1", p.dropSize);
+        dropSize1 = p.dropSize;
+        dropSize2 = p.dropSize2;
+        photoDelay = p.photoDelay;
+        //model.put("size1", p.dropSize);
         getComController(model).changeDropSize(p.dropSize+"");
-        model.put("size2", p.dropSize2);
+        //model.put("size2", p.dropSize2);
         getComController(model).changeSecondDropSize(p.dropSize2+"");
-        model.put("delay", p.dropDelay);
-        getComController(model).changePhotoDelay(p.dropDelay+"");
+        //model.put("delay", p.dropDelay);
+        getComController(model).changePhotoDelay(p.photoDelay+"");
         constatData(model);
         return "arduino";
     }
@@ -199,7 +202,7 @@ public class ArduinoController {
         console="";
         Preset p = new Preset();
         p.name = name;
-        p.dropDelay = Integer.parseInt(delay);
+        p.photoDelay = Integer.parseInt(delay);
         p.dropSize  = Integer.parseInt(size1);
         p.dropSize2 = Integer.parseInt(size2);
         System.out.println("Adding preset "+p.name+" "+p.dropSize+" "+p.dropSize2+" "+p.photoDelay);
