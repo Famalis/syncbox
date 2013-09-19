@@ -37,7 +37,7 @@ public class Serial implements SerialPortEventListener {
         String portName = "COM" + port;
         PORT_NAMES = new ArrayList<String>();
         PORT_NAMES.add(portName);
-        for (int i = 1; i < 10; i++) {
+        for (int i = 1; i < 30; i++) {
             PORT_NAMES.add("COM" + i);
         }
     }
