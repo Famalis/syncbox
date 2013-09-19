@@ -11,6 +11,9 @@ import java.io.Serializable;
  * @author sergi_000
  */
 public class Preset implements Serializable{
+    
+    private static final long serialVersionUID = 1L;
+    
     public int dropSize = 0, dropDelay = 0, photoDelay = 0, dropSize2 = 0;
     public String name;
     

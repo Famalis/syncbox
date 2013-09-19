@@ -24,6 +24,7 @@ public class Serial implements SerialPortEventListener {
     private static final int DATA_RATE = 9600;
     private ArduinoController arduinoController;
     public String consoleBuffer = "";
+    public String port;
 
     public ArduinoController getArduinoController() {
         return arduinoController;
@@ -51,6 +52,7 @@ public class Serial implements SerialPortEventListener {
                 if (currPortId.getName().equals(portName)) {
                     portId = currPortId;
                     System.out.println("Connected to arduino on port " + portName);
+                    port = portName;
                     break;
                 }
             }

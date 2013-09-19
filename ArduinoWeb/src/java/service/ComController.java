@@ -12,11 +12,13 @@ public class ComController {
     
     Serial serial;
     
+    public boolean connected = false;
     public static ArrayList<Preset> presets = new ArrayList<Preset>();
     public static String filePath = "presets.obj";
     
     public ComController() {  
-        serial = new Serial();    
+        serial = new Serial();  
+        /*
         Preset p = new Preset();
         p.name = "bleble";
         p.dropDelay = 10;
@@ -30,10 +32,21 @@ public class ComController {
         presets.add(p);
         presets.add(p1);
         savePreset();
+        * */
+        loadPresets();
+        System.out.println("Loading presets");
+        for (Preset p : presets) {
+            System.out.println(p.name);
+        }
     }
     
     public boolean initSerial() {
-        return serial.initialize();
+        if(serial.initialize()) {
+            connected = true;
+        } else {
+            connected = false;
+        }
+        return connected;
     }
     
     public void addPort(String portNumber) {
@@ -71,7 +84,7 @@ public class ComController {
         serial.sendCharacter('b');
     }
     
-    public void savePreset() {
+    public static void savePreset() {
         File file = null;
         FileOutputStream fos = null;
         ObjectOutputStream oos = null;
@@ -93,7 +106,7 @@ public class ComController {
         
     }
     
-    public void loadPresets()  {
+    public static void loadPresets()  {
         File file = null;
         FileInputStream fis = null;
         ObjectInputStream ois = null;
