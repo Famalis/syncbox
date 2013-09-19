@@ -26,6 +26,8 @@ public class ArduinoController {
     private static String userPort;
     private DropLoop singleLoop;
     public static String console = "";
+    public int dropSize1, dropSize2, photoDelay;
+    public String name = "Nazwa";
 
     @RequestMapping(method = RequestMethod.GET)
     public String home(ModelMap model) {
@@ -48,6 +50,10 @@ public class ArduinoController {
         } else {
             model.put("connectionMsg", "Brak połączenia z SyncBox ");
         }
+        model.put("size1", dropSize1);
+        model.put("size2", dropSize2);
+        model.put("delay", photoDelay);
+        model.put("name", name);
     }
 
     private void setUserPort(String port) {
@@ -77,7 +83,7 @@ public class ArduinoController {
     }
 
     @RequestMapping(method = RequestMethod.GET, params = "port")
-    public String loadChar(@RequestParam String port, ModelMap model) {
+    public String setPort(@RequestParam String port, ModelMap model) {
 
         console = "";
         setUserPort(port);
@@ -95,6 +101,7 @@ public class ArduinoController {
     String changeDropSize(@RequestParam String size, ModelMap model) {
         console = "";
         System.out.println("Change size " + size);
+        dropSize1 = Integer.parseInt(size);
         getComController(model).changeDropSize(size);        
         updateConsole(model);
         return console;
@@ -105,6 +112,7 @@ public class ArduinoController {
     String changeSecondDropSize(@RequestParam String size, ModelMap model) {
         console="";
         System.out.println("Change size 2 " + size);
+        dropSize2 = Integer.parseInt(size);
         getComController(model).changeSecondDropSize(size);
         updateConsole(model);
         return console;
@@ -115,6 +123,7 @@ public class ArduinoController {
     String changePhotoDelay(@RequestParam String delay, ModelMap model) {
         System.out.println("Change photo delay");
         console="";
+        photoDelay = Integer.parseInt(userPort);
         getComController(model).changePhotoDelay(delay);
         updateConsole(model);
         return console;
@@ -124,7 +133,7 @@ public class ArduinoController {
     public @ResponseBody
     String singleDrop(ModelMap model) {
         System.out.println("Single drop");
-        console="";
+        console="";        
         getComController(model).singleDrop();
         updateConsole(model);
         return console;
@@ -184,7 +193,7 @@ public class ArduinoController {
     }
 
     @RequestMapping(value = "/arduino/savePreset/{name}_{size1}_{size2}_{delay}", params = {"name", "size1", "size2" ,"delay"})
-    public @ResponseBody
+    public 
     String savePreset(@RequestParam String name, @RequestParam String size1, @RequestParam String size2, @RequestParam String delay, ModelMap model) {
         System.out.println("Save preset");
         console="";
@@ -197,7 +206,8 @@ public class ArduinoController {
         ComController.presets.add(p);
         ComController.savePreset();
         updateConsole(model);
-        return console;
+        constatData(model);
+        return "arduino";
     }
 
     

@@ -12,7 +12,6 @@
         </script>
         <script src="/ArduinoWeb/resources/angularjs/ArduinoController.js"></script>
         <script>
-            var presetNames = new Array();
             $(document).ready(function() {
                 $('#sizeSubmit').click(function(event) {
                     var sliderSize = $('#sizeSlide').val();
@@ -92,19 +91,19 @@
                     $("#scores").load("index.php #scores");
                 });
             });
-            function reloadPage()
+            function savePreset()
               {
-                  location.reload()
+                var presetName = $('#newPresetName').val();
+                var dropSize1 = $('#sizeSlide').val();
+                var dropSize2 = $('#sizeSlide2').val();
+                var photoDelay = $('#photoDelay').val();
+                $.get('/ArduinoWeb/app/arduino/savePreset/' + presetName + "_" + dropSize1 + "_" + dropSize2 + "_" + photoDelay + ".htm", {name: presetName, size1: dropSize1, size2: dropSize2, delay: photoDelay},
+                function(responseText) {
+                    $('#console').text('/ArduinoWeb/app/arduino/savePreset/' + presetName + "_" + dropSize1 + "_" + dropSize2 + "_" + photoDelay + ".htm");
+                });
+                setTimeout( function(){location.reload()}, 10 );
               }
-            function testF() {
-                $.get('/ArduinoWeb/app/arduino/stopLoop.htm', function(responseText) {
-                        $('#console').text(responseText);
-                    });
-            }
-            function setPreset(index, name) {
-                presetNames[index] = name;
-            }
-                        
+
         </script>
         <script type="text/javascript">
             function updateSlider(slideAmount, num) {
@@ -120,7 +119,7 @@
             }
         </script>
     </head>
-    <body ng-controller="ArduinoCtrl" ng-init="test = ${presets}">
+    <body ng-controller="ArduinoCtrl">
         <h4>${connectionMsg}${port}</h4>   
         <table border="1px">
             <tr>
@@ -188,7 +187,7 @@
                         <input type="submit" value="Wczytaj preset" id="loadPreset"/>
                     </form>
                     <input type="text" id="newPresetName" value="Nazwa"/>
-                    <input type="submit" value="Zapisz preset" id="savePreset" onclick="reloadPage()"/>
+                    <input type="submit" value="Zapisz preset" id="savePreset" onclick="savePreset()"/>
                 </td>
             </tr>
         </table>
