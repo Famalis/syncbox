@@ -126,7 +126,7 @@
         <script type="text/javascript">
             setTimeout(function() {
                 $('#info').fadeOut('slow');
-            },5000); // <-- time in milliseconds
+            }, 5000); // <-- time in milliseconds
 
 
         </script>
