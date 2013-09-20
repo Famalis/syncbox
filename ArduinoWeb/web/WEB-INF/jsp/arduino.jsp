@@ -169,6 +169,33 @@
                 });
             });
         </script>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $('#sizeSubmit').click(function() {
+                    $.blockUI({message: null});
+
+                    setTimeout($.unblockUI, 500);
+                });
+            });
+        </script>
+         <script type="text/javascript">
+            $(document).ready(function() {
+                $('#sizeSubmit2').click(function() {
+                    $.blockUI({message: null});
+
+                    setTimeout($.unblockUI, 500);
+                });
+            });
+        </script>
+          <script type="text/javascript">
+            $(document).ready(function() {
+                $('#photoDelaySubmit').click(function() {
+                    $.blockUI({message: null});
+
+                    setTimeout($.unblockUI, 500);
+                });
+            });
+        </script>
 
         <title>SyncBox&#8482 - GUI</title>
     </head>
