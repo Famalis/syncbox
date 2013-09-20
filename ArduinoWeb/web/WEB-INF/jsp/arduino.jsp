@@ -178,7 +178,7 @@
                 });
             });
         </script>
-         <script type="text/javascript">
+        <script type="text/javascript">
             $(document).ready(function() {
                 $('#sizeSubmit2').click(function() {
                     $.blockUI({message: null});
@@ -187,9 +187,28 @@
                 });
             });
         </script>
-          <script type="text/javascript">
+        <script type="text/javascript">
             $(document).ready(function() {
                 $('#photoDelaySubmit').click(function() {
+                    $.blockUI({message: null});
+
+                    setTimeout($.unblockUI, 500);
+                });
+            });
+        </script>
+
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $('#stopLoop').click(function() {
+                    $.blockUI({message: null});
+
+                    setTimeout($.unblockUI, 500);
+                });
+            });
+        </script>
+         <script type="text/javascript">
+            $(document).ready(function() {
+                $('#loopSingleDrop').click(function() {
                     $.blockUI({message: null});
 
                     setTimeout($.unblockUI, 500);
