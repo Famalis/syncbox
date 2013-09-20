@@ -15,6 +15,8 @@
                     $.get('/ArduinoWeb/app/arduino/changeSize/' + sliderSize + '.htm', {size: sliderSize}, function(responseText) {
                         $('#console').text(responseText);
                     });
+                    setTimeout(function() {
+                }, 10);
                 });
             });
 
@@ -41,6 +43,9 @@
                     $.get('/ArduinoWeb/app/arduino/singleDrop.htm', function(responseText) {
                         $('#console').text(responseText);
                     });
+                    setTimeout(function() {
+                    location.reload();
+                }, 10);
                 });
             });
 
@@ -49,6 +54,9 @@
                     $.get('/ArduinoWeb/app/arduino/twoDrops.htm', function(responseText) {
                         $('#console').text(responseText);
                     });
+                    setTimeout(function() {
+                    location.reload();
+                }, 10);
                 });
             });
 
@@ -58,6 +66,9 @@
                     $.get('/ArduinoWeb/app/arduino/loopSingleDrop/' + check + '.htm', {check: check}, function(responseText) {
                         $('#console').text(responseText);
                     });
+                    setTimeout(function() {
+                    location.reload();
+                }, 10);
                 });
             });
 
@@ -67,6 +78,9 @@
                     $.get('/ArduinoWeb/app/arduino/loopTwoDrops.htm/' + check + '.htm', {check: check}, function(responseText) {
                         $('#console').text(responseText);
                     });
+                    setTimeout(function() {
+                    location.reload();
+                }, 10);
                 });
             });
 
@@ -75,6 +89,9 @@
                     $.get('/ArduinoWeb/app/arduino/stopLoop.htm', function(responseText) {
                         $('#console').text(responseText);
                     });
+                    setTimeout(function() {
+                    location.reload();
+                }, 10);
                 });
             });
             $(document).ready(function() {
@@ -82,6 +99,9 @@
                     $.get('/ArduinoWeb/app/arduino/openPump.htm', function(responseText) {
                         $('#console').text(responseText);
                     });
+                    setTimeout(function() {
+                    location.reload();
+                }, 10);
                 });
             });
             $(document).ready(function() {
