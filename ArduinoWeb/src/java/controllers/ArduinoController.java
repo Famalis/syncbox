@@ -123,7 +123,7 @@ public class ArduinoController {
     String changePhotoDelay(@RequestParam String delay, ModelMap model) {
         System.out.println("Change photo delay");
         console = "";
-        photoDelay = Integer.parseInt(userPort);
+        photoDelay = Integer.parseInt(delay);
         getComController(model).changePhotoDelay(delay);
         updateConsole(model);
         return console;
