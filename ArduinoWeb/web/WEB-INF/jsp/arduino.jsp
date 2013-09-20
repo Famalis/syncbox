@@ -57,7 +57,8 @@
 
             $(document).ready(function() {
                 $('#loopSingleDrop').click(function(event) {
-                    $.get('/ArduinoWeb/app/arduino/loopSingleDrop.htm', function(responseText) {
+                    var check = $('#loopSingleDrop').val();
+                    $.get('/ArduinoWeb/app/arduino/loopSingleDrop/'+check+'.htm',{check : check}, function(responseText) {
                         $('#console').text(responseText);
                     });
                 });
@@ -65,7 +66,8 @@
 
             $(document).ready(function() {
                 $('#loopTwoDrops').click(function(event) {
-                    $.get('/ArduinoWeb/app/arduino/loopTwoDrops.htm', function(responseText) {
+                    var check = $('#loopTwoDrops').val();
+                    $.get('/ArduinoWeb/app/arduino/loopTwoDrops.htm/'+check+'.htm',{check : check}, function(responseText) {
                         $('#console').text(responseText);
                     });
                 });
@@ -165,10 +167,10 @@
             </tr>
             <tr>
                 <td>
-                    <input type="submit" id="loopSingleDrop" value="Powatarzaj jedną kroplę"/>
+                    <input ng-model="singleLoop" type="checkbox" name="loop" id="loopSingleDrop" value="{{singleLoop}}"/>                    
                 </td>
                 <td>
-                    <input type="submit" id="loopTwoDrops" value="Powatarzaj dwie krople"/>
+                    <input ng-model="doubleLoop" type="checkbox" name="loop" id="loopTwoDrops" value="{{doubleLoop}}"/>
                 </td>
                 <td>
                     <input type="submit" id="stopLoop" value="Zatrzymaj powtarzanie"/>
