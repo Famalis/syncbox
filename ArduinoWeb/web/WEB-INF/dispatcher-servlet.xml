@@ -26,8 +26,8 @@
                 <prop key="arduino/changeSize2/{size}.htm">arduinoController</prop>
                 <prop key="arduino/changeDelay/{delay}.htm">arduinoController</prop>                
                 <prop key="arduino/singleDrop.htm">arduinoController</prop>
-                <prop key="arduino/loopSingleDrop.htm">arduinoController</prop>
-                <prop key="arduino/loopTwoDrops.htm">arduinoController</prop>
+                <prop key="arduino/loopSingleDrop/{check}.htm">arduinoController</prop>
+                <prop key="arduino/loopTwoDrops/{check}.htm">arduinoController</prop>
                 <prop key="arduino/stopLoop.htm">arduinoController</prop>
                 <prop key="arduino/twoDrops.htm">arduinoController</prop>
                 <prop key="arduino/loadPreset/{id}.htm">arduinoController</prop>

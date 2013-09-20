@@ -6,6 +6,7 @@
         <link rel="stylesheet" type="text/css" href="/ArduinoWeb/resources/style.css" />
         <script src="http://code.jquery.com/jquery-latest.js"></script>
         <script src="/ArduinoWeb/resources/js/jquery-2.0.3.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script>
         <script>
             $(document).ready(function() {
                 $('#sizeSubmit').click(function(event) {
@@ -52,7 +53,8 @@
 
             $(document).ready(function() {
                 $('#loopSingleDrop').click(function(event) {
-                    $.get('/ArduinoWeb/app/arduino/loopSingleDrop.htm', function(responseText) {
+                    var check = $('#loopType').val();
+                    $.get('/ArduinoWeb/app/arduino/loopSingleDrop/' + check + '.htm', {check: check}, function(responseText) {
                         $('#console').text(responseText);
                     });
                 });
@@ -60,7 +62,8 @@
 
             $(document).ready(function() {
                 $('#loopTwoDrops').click(function(event) {
-                    $.get('/ArduinoWeb/app/arduino/loopTwoDrops.htm', function(responseText) {
+                    var check = $('#loopTwoDrops').val();
+                    $.get('/ArduinoWeb/app/arduino/loopTwoDrops.htm/' + check + '.htm', {check: check}, function(responseText) {
                         $('#console').text(responseText);
                     });
                 });
@@ -134,7 +137,7 @@
         <title>SyncBox&#8482 - GUI</title>
     </head>
 
-    <body ng-controller="ArduinoCtrl">
+    <body>
 
         <div class="container">
             <div class="syncbox-info" id="info"><h1>${connectionMsg}${port}</h1></div>
@@ -170,18 +173,19 @@
                     <div class="ustawienia-krecha"></div>
                     <div id="ustawienia-list">
 
-                        <div class="ustawienia-radio">
+                        <div class="ustawienia-radio" ng-init="loop='none'">
                             <p>
-                                <input type="radio" id="r5" name="du" />
+                                <input ng-click="loop='single'" type="radio" id="r5" name="du" />
                                 <label for="r5"><span></span>Powtarzaj jedną kroplę</label>
                             </p>
                             <div class="ustawienia-krecha"></div>
                             <p>
-                                <input type="radio" id="r6" name="du" />
+                                <input ng-click="loop='double'" type="radio" id="r6" name="du" />
                                 <label for="r6"><span></span>Powtarzaj dwie krople</label>
                             </p>
-                            <div class="stop-button"><input type="submit" class="ustawienia-button-stop" value="STOP" disabled></div>
-                            <div class="start-button"><input type="submit" class="ustawienia-button" value="START"></div>
+                            <!-- Nie ruszać tego inputa! :P --><input type="text" ng-show="false" id="loopType" ng-model="loop"/>
+                            <div class="stop-button"><input type="submit" id="stopLoop" class="ustawienia-button-stop" value="STOP"></div>
+                            <div class="start-button"><input type="submit" id="loopSingleDrop" class="ustawienia-button" value="START"></div>
 
                         </div> <!-- koniec | ustawienia-radio -->
 
@@ -283,10 +287,10 @@
             </tr>
             <tr>
                 <td>
-                    <input type="submit" id="loopSingleDrop" value="Powatarzaj jedną kroplę"/>
+                    <input ng-model="singleLoop" type="checkbox" name="loop" id="loopSingleDrop" value="{{singleLoop}}"/>                    
                 </td>
                 <td>
-                    <input type="submit" id="loopTwoDrops" value="Powatarzaj dwie krople"/>
+                    <input ng-model="doubleLoop" type="checkbox" name="loop" id="loopTwoDrops" value="{{doubleLoop}}"/>
                 </td>
                 <td>
                     <input type="submit" id="stopLoop" value="Zatrzymaj powtarzanie"/>
