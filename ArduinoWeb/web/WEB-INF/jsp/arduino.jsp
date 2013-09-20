@@ -6,6 +6,7 @@
         <link rel="stylesheet" type="text/css" href="/ArduinoWeb/resources/style.css" />
         <script src="http://code.jquery.com/jquery-latest.js"></script>
         <script src="/ArduinoWeb/resources/js/jquery-2.0.3.js"></script>
+        <script src="/ArduinoWeb/resources/js/jquery.blockUI.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script>
         <script>
             $(document).ready(function() {
@@ -132,6 +133,34 @@
             }, 5000); // <-- time in milliseconds
 
 
+        </script>
+
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $('#pompka').click(function() {
+                    $.blockUI({message: null});
+
+                    setTimeout($.unblockUI, 5000);
+                });
+            });
+        </script>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $('#singleDropButton').click(function() {
+                    $.blockUI({message: null});
+
+                    setTimeout($.unblockUI, 2000);
+                });
+            });
+        </script>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $('#twoDropsButton').click(function() {
+                    $.blockUI({message: null});
+
+                    setTimeout($.unblockUI, 2000);
+                });
+            });
         </script>
 
         <title>SyncBox&#8482 - GUI</title>
