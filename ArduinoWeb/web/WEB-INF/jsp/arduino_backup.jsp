@@ -275,5 +275,80 @@
                 </div> <!-- koniec | opoznienie-aparatu -->
             </div> <!-- koniec | right-side -->
         </div> <!-- koniec | container -->
+
+        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+        <h4>${connectionMsg}${port}</h4>   
+        <table border="1px">
+            <tr>
+                <td>
+                    <div>
+                        <input name="input" id="sizeSlide" type="range" min="5" max="200" step="5" value="${size1}" onchange="updateSlider(this.value, 1)" />                        
+                    </div><br/>
+                    <div id="chosen1">${size1}</div>                    
+                </td>
+                <td>
+                    <input id="sizeSubmit" type="submit" value="Zmie? rozmiar kropli"/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div>
+                        <input name="input" id="sizeSlide2" type="range" min="5" max="200" step="5" value="${size2}" onchange="updateSlider(this.value, 3)" />                        
+                    </div><br/>
+                    <div id="chosen3">${size2}</div>                    
+                </td>
+                <td>
+                    <input id="sizeSubmit2" type="submit" value="Zmie? rozmiar drugiej kropli"/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div>
+                        <input name="input" id="photoDelay" type="range" min="5" max="200" step="5" value="${delay}" onchange="updateSlider(this.value, 2)" />                        
+                    </div><br/>
+                    <div id="chosen2">${delay}</div>                    
+                </td>
+                <td>
+                    <input id="photoDelaySubmit" type="submit" value="Zmie? opó?nienie zdj?cia"/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="submit" id="singleDropButton" value="Zdj?cie jednej kropli"/>
+                </td>
+                <td>
+                    <input type="submit" id="twoDropsButton" value="Zdj?cie dwóch kropel"/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input ng-model="singleLoop" type="checkbox" name="loop" id="loopSingleDrop" value="{{singleLoop}}"/>                    
+                </td>
+                <td>
+                    <input ng-model="doubleLoop" type="checkbox" name="loop" id="loopTwoDrops" value="{{doubleLoop}}"/>
+                </td>
+                <td>
+                    <input type="submit" id="stopLoop" value="Zatrzymaj powtarzanie"/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <form name="preset" action="arduino.htm" method="get">                        
+                        Presets:
+
+                        <c:forEach var="preset" items="${presets}" varStatus="counter">
+                            <li>${preset} <input type="radio" name="preset" value="${counter.count}"</li>
+                            </c:forEach>
+
+
+                        <input type="submit" value="Wczytaj preset" id="loadPreset"/>
+                    </form>
+                    <input type="text" id="newPresetName" value="Nazwa"/>
+                    <input type="submit" value="Zapisz preset" id="savePreset" onclick="savePreset()"/>
+                </td>
+            </tr>
+        </table>
+        <p id="console"></p>
     </body>
 </html>
