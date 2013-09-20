@@ -123,7 +123,13 @@
 
             }
         </script>
+        <script type="text/javascript">
+            setTimeout(function() {
+                $('#info').fadeOut('slow');
+            },5000); // <-- time in milliseconds
 
+
+        </script>
 
         <title>SyncBox&#8482 - GUI</title>
     </head>
@@ -131,6 +137,7 @@
     <body ng-controller="ArduinoCtrl">
 
         <div class="container">
+            <div class="syncbox-info" id="info"><h1>${connectionMsg}${port}</h1></div>
 
             <div class="left-side">
                 <div class="lista-presetow">
@@ -203,29 +210,29 @@
                 </div> <!-- koniec | dwie-krople-button -->
             </div> <!-- koniec | left-side -->
             <div class="right-side">
-            <div class="rozmiar-kropli">
-                <h1><img id="ico" src="/ArduinoWeb/resources/images/rozmiar-kropli-ico.png">ROZMIAR KROPLI</h1>
-                <div class="suwak-wartosc" id="chosen1">${size1}</div>
-                <div class="suwak"><input name="input" id="sizeSlide" type="range" min="5" max="200" step="1" value="${size1}" onchange="updateSlider(this.value, 1)" /></div>
-                <div class="suwak-button"><input id="sizeSubmit" class="rozmiar-button" type="submit" value="USTAW"/></div>  
+                <div class="rozmiar-kropli">
+                    <h1><img id="ico" src="/ArduinoWeb/resources/images/rozmiar-kropli-ico.png">ROZMIAR KROPLI</h1>
+                    <div class="suwak-wartosc" id="chosen1">${size1}</div>
+                    <div class="suwak"><input name="input" id="sizeSlide" type="range" min="5" max="200" step="1" value="${size1}" onchange="updateSlider(this.value, 1)" /></div>
+                    <div class="suwak-button"><input id="sizeSubmit" class="rozmiar-button" type="submit" value="USTAW"/></div>  
 
-            </div> <!-- koniec | rozmiar-kropli -->
+                </div> <!-- koniec | rozmiar-kropli -->
 
-            <div class="rozmiar-drugiej-kropli">
-                <h1><img id="ico" src="/ArduinoWeb/resources/images/rozmiar-drugiej-kropli-ico.png">ROZMIAR DRUGIEJ KROPLI</h1>
-                <div class="suwak-wartosc" id="chosen3">${size2}</div>
-                <div class="suwak"><input name="input" id="sizeSlide2" type="range" min="5" max="200" step="1" value="${size2}" onchange="updateSlider(this.value, 3)" /></div>
-                <div class="suwak-button"><input id="sizeSubmit2" class="rozmiar-button" type="submit" value="USTAW"/></div>                     
+                <div class="rozmiar-drugiej-kropli">
+                    <h1><img id="ico" src="/ArduinoWeb/resources/images/rozmiar-drugiej-kropli-ico.png">ROZMIAR DRUGIEJ KROPLI</h1>
+                    <div class="suwak-wartosc" id="chosen3">${size2}</div>
+                    <div class="suwak"><input name="input" id="sizeSlide2" type="range" min="5" max="200" step="1" value="${size2}" onchange="updateSlider(this.value, 3)" /></div>
+                    <div class="suwak-button"><input id="sizeSubmit2" class="rozmiar-button" type="submit" value="USTAW"/></div>                     
 
-            </div> <!-- koniec | rozmiar-drugiej-kropli -->
+                </div> <!-- koniec | rozmiar-drugiej-kropli -->
 
-            <div class="opoznienie-aparatu">
-                <h1><img id="ico" src="/ArduinoWeb/resources/images/opoznienie-aparatu-ico.png">OPÓŹNIENIE APARATU</h1>
-                <div class="suwak-wartosc" id="chosen2">${delay}</div>
-                <div class="suwak"><input name="input" id="photoDelay" type="range" min="5" max="200" step="1" value="${delay}" onchange="updateSlider(this.value, 2)" /></div>
-                <div class="suwak-button"><input id="photoDelaySubmit" class="rozmiar-button" type="submit" value="USTAW"/></div>                     
+                <div class="opoznienie-aparatu">
+                    <h1><img id="ico" src="/ArduinoWeb/resources/images/opoznienie-aparatu-ico.png">OPÓŹNIENIE APARATU</h1>
+                    <div class="suwak-wartosc" id="chosen2">${delay}</div>
+                    <div class="suwak"><input name="input" id="photoDelay" type="range" min="5" max="200" step="1" value="${delay}" onchange="updateSlider(this.value, 2)" /></div>
+                    <div class="suwak-button"><input id="photoDelaySubmit" class="rozmiar-button" type="submit" value="USTAW"/></div>                     
 
-            </div> <!-- koniec | opoznienie-aparatu -->
+                </div> <!-- koniec | opoznienie-aparatu -->
             </div> <!-- koniec | right-side -->
         </div> <!-- koniec | container -->
 
