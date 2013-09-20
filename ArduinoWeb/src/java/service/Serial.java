@@ -49,10 +49,12 @@ public class Serial implements SerialPortEventListener {
         while (portEnum.hasMoreElements()) {
             CommPortIdentifier currPortId = (CommPortIdentifier) portEnum.nextElement();
             for (String portName : PORT_NAMES) {
-                if (currPortId.getName().equals(portName)) {
+                boolean found = false;
+                if (currPortId.getName().equals(portName) && !found) {
                     portId = currPortId;
                     System.out.println("Connected to arduino on port " + portName);
                     port = portName;
+                    found = true;
                     break;
                 }
             }
