@@ -6,6 +6,7 @@
         <link rel="stylesheet" type="text/css" href="/ArduinoWeb/resources/style.css" />
         <script src="http://code.jquery.com/jquery-latest.js"></script>
         <script src="/ArduinoWeb/resources/js/jquery-2.0.3.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script>
         <script>
             $(document).ready(function() {
                 $('#sizeSubmit').click(function(event) {
@@ -52,8 +53,8 @@
 
             $(document).ready(function() {
                 $('#loopSingleDrop').click(function(event) {
-                    var check = $('#loopSingleDrop').val();
-                    $.get('/ArduinoWeb/app/arduino/loopSingleDrop/'+check+'.htm',{check : check}, function(responseText) {
+                    var check = $('#loopType').val();
+                    $.get('/ArduinoWeb/app/arduino/loopSingleDrop/' + check + '.htm', {check: check}, function(responseText) {
                         $('#console').text(responseText);
                     });
                 });
@@ -62,7 +63,7 @@
             $(document).ready(function() {
                 $('#loopTwoDrops').click(function(event) {
                     var check = $('#loopTwoDrops').val();
-                    $.get('/ArduinoWeb/app/arduino/loopTwoDrops.htm/'+check+'.htm',{check : check}, function(responseText) {
+                    $.get('/ArduinoWeb/app/arduino/loopTwoDrops.htm/' + check + '.htm', {check: check}, function(responseText) {
                         $('#console').text(responseText);
                     });
                 });
@@ -130,7 +131,7 @@
         <title>SyncBox&#8482 - GUI</title>
     </head>
 
-    <body ng-controller="ArduinoCtrl">
+    <body>
 
         <div class="container">
 
@@ -165,18 +166,19 @@
                     <div class="ustawienia-krecha"></div>
                     <div id="ustawienia-list">
 
-                        <div class="ustawienia-radio">
+                        <div class="ustawienia-radio" ng-init="loop='none'">
                             <p>
-                                <input type="radio" id="r5" name="du" />
+                                <input ng-click="loop='single'" type="radio" id="r5" name="du" />
                                 <label for="r5"><span></span>Powtarzaj jedną kroplę</label>
                             </p>
                             <div class="ustawienia-krecha"></div>
                             <p>
-                                <input type="radio" id="r6" name="du" />
+                                <input ng-click="loop='double'" type="radio" id="r6" name="du" />
                                 <label for="r6"><span></span>Powtarzaj dwie krople</label>
                             </p>
-                            <div class="stop-button"><input type="submit" class="ustawienia-button-stop" value="STOP" disabled></div>
-                            <div class="start-button"><input type="submit" class="ustawienia-button" value="START"></div>
+                            <!-- Nie ruszać tego inputa! :P --><input type="text" ng-show="false" id="loopType" ng-model="loop"/>
+                            <div class="stop-button"><input type="submit" id="stopLoop" class="ustawienia-button-stop" value="STOP"></div>
+                            <div class="start-button"><input type="submit" id="loopSingleDrop" class="ustawienia-button" value="START"></div>
 
                         </div> <!-- koniec | ustawienia-radio -->
 
@@ -205,29 +207,29 @@
                 </div> <!-- koniec | dwie-krople-button -->
             </div> <!-- koniec | left-side -->
             <div class="right-side">
-            <div class="rozmiar-kropli">
-                <h1><img id="ico" src="/ArduinoWeb/resources/images/rozmiar-kropli-ico.png">ROZMIAR KROPLI</h1>
-                <div class="suwak-wartosc" id="chosen1">${size1}</div>
-                <div class="suwak"><input name="input" id="sizeSlide" type="range" min="5" max="200" step="1" value="${size1}" onchange="updateSlider(this.value, 1)" /></div>
-                <div class="suwak-button"><input id="sizeSubmit" class="rozmiar-button" type="submit" value="USTAW"/></div>  
+                <div class="rozmiar-kropli">
+                    <h1><img id="ico" src="/ArduinoWeb/resources/images/rozmiar-kropli-ico.png">ROZMIAR KROPLI</h1>
+                    <div class="suwak-wartosc" id="chosen1">${size1}</div>
+                    <div class="suwak"><input name="input" id="sizeSlide" type="range" min="5" max="200" step="1" value="${size1}" onchange="updateSlider(this.value, 1)" /></div>
+                    <div class="suwak-button"><input id="sizeSubmit" class="rozmiar-button" type="submit" value="USTAW"/></div>  
 
-            </div> <!-- koniec | rozmiar-kropli -->
+                </div> <!-- koniec | rozmiar-kropli -->
 
-            <div class="rozmiar-drugiej-kropli">
-                <h1><img id="ico" src="/ArduinoWeb/resources/images/rozmiar-drugiej-kropli-ico.png">ROZMIAR DRUGIEJ KROPLI</h1>
-                <div class="suwak-wartosc" id="chosen3">${size2}</div>
-                <div class="suwak"><input name="input" id="sizeSlide2" type="range" min="5" max="200" step="1" value="${size2}" onchange="updateSlider(this.value, 3)" /></div>
-                <div class="suwak-button"><input id="sizeSubmit2" class="rozmiar-button" type="submit" value="USTAW"/></div>                     
+                <div class="rozmiar-drugiej-kropli">
+                    <h1><img id="ico" src="/ArduinoWeb/resources/images/rozmiar-drugiej-kropli-ico.png">ROZMIAR DRUGIEJ KROPLI</h1>
+                    <div class="suwak-wartosc" id="chosen3">${size2}</div>
+                    <div class="suwak"><input name="input" id="sizeSlide2" type="range" min="5" max="200" step="1" value="${size2}" onchange="updateSlider(this.value, 3)" /></div>
+                    <div class="suwak-button"><input id="sizeSubmit2" class="rozmiar-button" type="submit" value="USTAW"/></div>                     
 
-            </div> <!-- koniec | rozmiar-drugiej-kropli -->
+                </div> <!-- koniec | rozmiar-drugiej-kropli -->
 
-            <div class="opoznienie-aparatu">
-                <h1><img id="ico" src="/ArduinoWeb/resources/images/opoznienie-aparatu-ico.png">OPÓŹNIENIE APARATU</h1>
-                <div class="suwak-wartosc" id="chosen2">${delay}</div>
-                <div class="suwak"><input name="input" id="photoDelay" type="range" min="5" max="200" step="1" value="${delay}" onchange="updateSlider(this.value, 2)" /></div>
-                <div class="suwak-button"><input id="photoDelaySubmit" class="rozmiar-button" type="submit" value="USTAW"/></div>                     
+                <div class="opoznienie-aparatu">
+                    <h1><img id="ico" src="/ArduinoWeb/resources/images/opoznienie-aparatu-ico.png">OPÓŹNIENIE APARATU</h1>
+                    <div class="suwak-wartosc" id="chosen2">${delay}</div>
+                    <div class="suwak"><input name="input" id="photoDelay" type="range" min="5" max="200" step="1" value="${delay}" onchange="updateSlider(this.value, 2)" /></div>
+                    <div class="suwak-button"><input id="photoDelaySubmit" class="rozmiar-button" type="submit" value="USTAW"/></div>                     
 
-            </div> <!-- koniec | opoznienie-aparatu -->
+                </div> <!-- koniec | opoznienie-aparatu -->
             </div> <!-- koniec | right-side -->
         </div> <!-- koniec | container -->
 
