@@ -206,6 +206,13 @@ public class ArduinoController {
             
         }
     }
+    
+    @RequestMapping(value = "/arduino/openPump")
+    public @ResponseBody
+    void openPump(ModelMap model) {
+        System.out.println("Open pump");
+        getComController(model).openPump();
+    }
 
     @RequestMapping(method = RequestMethod.GET, params = "preset")
     public String loadPreset(@RequestParam String preset, ModelMap model) {

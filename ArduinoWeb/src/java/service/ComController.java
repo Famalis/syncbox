@@ -84,6 +84,15 @@ public class ComController {
         serial.sendCharacter('b');
     }
     
+    public void openPump() {
+        serial.sendCharacter('x');
+        long startTime = System.currentTimeMillis();
+        while(System.currentTimeMillis()-startTime<10000) {
+            //System.out.println(System.currentTimeMillis()-startTime);
+        }
+        serial.sendCharacter('v');
+    }
+    
     public static void savePreset() {
         File file = null;
         FileOutputStream fos = null;

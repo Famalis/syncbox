@@ -77,6 +77,13 @@
                 });
             });
             $(document).ready(function() {
+                $('#pompka').click(function(event) {
+                    $.get('/ArduinoWeb/app/arduino/openPump.htm', function(responseText) {
+                        $('#console').text(responseText);
+                    });
+                });
+            });
+            $(document).ready(function() {
                 $('#savePreset').click(function(event) {
                     var presetName = $('#newPresetName').val();
                     var dropSize1 = $('#sizeSlide').val();
