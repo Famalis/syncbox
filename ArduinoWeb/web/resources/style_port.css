@@ -1,0 +1,167 @@
+@charset "utf-8";
+
+/*----------------------------------------------*/
+/* Czcionki */
+@font-face
+{
+font-family: Helvetica35;
+src: url(/ArduinoWeb/resources/fonts/Helvetica35.ttf);
+}
+
+@font-face
+{
+font-family: Kievit-book;
+src: url(/ArduinoWeb/resources/fonts/KievitPro-Book.otf);
+}
+@font-face
+{
+font-family: Kievit-extra;
+src: url(/ArduinoWeb/resources/fonts/KievitPro-ExtraLight.otf);
+}
+@font-face
+{
+font-family: Kievit-light;
+src: url(/ArduinoWeb/resources/fonts/KievitPro-Light.otf);
+}
+@font-face
+{
+font-family: Kievit-thin;
+src: url(/ArduinoWeb/resources/fonts/KievitPro-Thin.otf);
+}
+
+/*----------------------------------------------*/
+/* Clear-fix */
+/* For modern browsers */
+.container:before,
+.container:after {
+    content:"";
+    display:table;
+}
+.container:after {
+    clear:both;
+}
+/* For IE 6/7 (trigger hasLayout) */
+.container {
+    zoom:1;
+}
+
+/*----------------------------------------------*/
+/* Podstawowe */
+a {
+	text-decoration:none;
+	color:#000;
+}
+h1 {
+	position:relative;
+	top:34px;
+	float:left;
+	font-family:Kievit-light;
+	font-size:29px;
+	font-weight:lighter;
+	padding-bottom:60px;
+}
+body {
+	font-family:Kievit-light;
+	background-color:#F9F9F9;
+	margin:50px 0px; padding:0px;
+	text-align:center;
+}
+.container {
+	width:590px;
+	height:408px;
+	position:absolute;
+	left:50%;
+	top:50%;
+	margin-left:-295px;
+	margin-top:-220px;
+	text-align:center;
+	
+}
+.port {
+	position:relative;
+	text-align:left;
+	-moz-box-shadow: 0 0 5px #f2f2f2;
+	-webkit-box-shadow: 0 0 5px#f2f2f2;
+	box-shadow: 0 0 5px #f2f2f2;
+	width:590px;
+	height:100%;
+	background-color:#FFF;
+}
+
+.port #ico {
+	position:relative;
+	float:left;
+	padding-left:42px;
+	padding-right:25px;
+}
+.port-krecha {
+	clear:both;
+	margin-bottom:0px;
+	width:590px;
+	height:1px;
+	background-color:#F2F2F2;
+}
+.port .port-name {
+	position:absolute;
+	left:41px;
+}
+
+.port .port-button {
+	position:absolute;
+	right:148px;
+}
+.port-inputs {
+	margin-top:27px;
+	margin-bottom:33px;
+	height:40px;
+}
+
+input.port-button {
+	padding-left:7px;
+	width:100px;
+	height:36px;
+	cursor:pointer; 
+	background:#00b6d1; 
+	border:0px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+	color:#FFF;
+	font-family:Kievit-book;
+	font-size:18px;
+}
+
+input.port-button:hover, input.port-button:focus{
+	background-color :#0098af;
+}
+
+
+
+
+input.port-name {
+	font-family:Helvetica35;
+	font-size: 17px;
+	color:#a6a6a6;
+	padding-top:1px;
+	padding-left:15px;
+	width:276px;
+	height:32px;
+	border: 1px solid #ededed;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+	outline: 0;
+	-webkit-appearance: none;
+}
+input.port-name:focus {
+	border-color: #00b6d1;
+}
+.port-text {
+	font-family:Helvetica35;
+	font-size:18px;
+	line-height:26px;
+	color:#929292;
+	text-align:justify;
+	margin-left:42px;
+	margin-right:42px;
+}
